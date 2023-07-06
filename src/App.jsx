@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 export default function app(){
-  const [newItem, SetNewItem] = useState("Kill");
+  const [newItem, SetNewItem] = useState();
   const [Todos, SetTodos] = useState([]);
 
   function handleSubmit(e){
@@ -12,7 +12,26 @@ export default function app(){
         [...currentTodos,{id: crypto.randomUUID(), title: newItem, completed: false},]
       )
     });
+
+    SetNewItem("");
   }
+
+  function toggleTodo(id, completed){
+    SetTodos(currentTodos => {
+      return currentTodos.map(todo => {
+        if(todo.id === id){
+          return {...todo, completed}
+        }
+      })
+    })
+  }
+
+  function deleteTodo(id){
+    SetTodos(currentTodos => {
+      return currentTodos.filter(todo => todo.id !== id)
+    })
+  }
+
   return(
     <> 
     <form onSubmit={handleSubmit} className="new-item-form">
@@ -29,10 +48,10 @@ export default function app(){
     return(
       <li>
       <label>
-        <input type="checkbox" checked={Todo.completed}/>
+        <input type="checkbox" checked={Todo.completed} onChange={ (e) => toggleTodo(Todo.id, e.target.checked)}/>
         {Todo.title}
       </label>
-      <button className="btn btn-danger">Delete</button>
+      <button className="btn btn-danger" onClick={ () => deleteTodo(Todo.id)}>Delete</button>
     </li>
     )
   })}
