@@ -1,4 +1,5 @@
 import { useState } from "react"
+import './styles.css'
 
 export default function app(){
   const [newItem, SetNewItem] = useState();
