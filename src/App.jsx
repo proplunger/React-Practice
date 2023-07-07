@@ -45,6 +45,7 @@ export default function app(){
   </form>
   <h1 className="header">Todo List</h1>
   <ul>
+    {Todos.length === 0 && "No Todos"}
   {Todos.map(Todo =>{
     return(
       <li>
