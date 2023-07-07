@@ -56,8 +56,7 @@ export default function app(){
       <button className="btn btn-danger" onClick={ () => deleteTodo(Todo.id)}>Delete</button>
     </li>
     )
-  })}
-    
+  })}    
   </ul>
     </>
   )
